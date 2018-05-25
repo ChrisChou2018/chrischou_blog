@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block css %}
+
+{% end %}
+
+{% block content %}
+<div class="col-md-8 blog-main">
+  {% for i in article_list %}
+  <div class="blog-post">
+    <h3>{{ i.article_title }}</h3>
+    <p class="blog-post-meta">{{i.create_time}} 
+      {% if current_user %}
+        <a href="/editor_article/?article_id={{i.article_id}}" style='cursor:pointer;text-decoration:none;font-size: 15px;'>编辑</a>
+        <a style='cursor:pointer;text-decoration:none;font-size: 15px;' class="delete_article" article-id="{{i.article_id}}">删除</a>
+      {% else %}
+        <a href="#"></a>
+      {% end %}
+    </p>
+    <a href="/article_content/?article_id={{ i.article_id }}" style='cursor:pointer;text-decoration:none;font-size: 15px;'> {% module GetContentByArticleId(i.article_id) %} </a>
+    <hr>
+  </div><!-- /.blog-post -->
+  {% end %}
+  
+  <nav aria-label="Page navigation">
+      <ul class="pagination page_box">
+          {% module Pagingfunc(current_page, article_count, filter_args, url) %}
+      </ul>
+  </nav>
+</div><!-- /.blog-main -->
+
+{% end %}
+
+{% block js %}
+<script>
+  $(function(){
+    function getCookie(name) {
+        var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+        return r ? r[1] : undefined;
+    }
+    var delete_btn = $('.delete_article')
+    
+    if(delete_btn){
+      var article_id = $(delete_btn).attr('article-id')
+      $(delete_btn).click(function(){
+        var se = confirm("是否确认删除")
+        if(se==true){
+          $.post(
+            '/delete_article/',
+            {'article_id':article_id,
+            '_xsrf': getCookie("_xsrf")},
+            function(value){
+              if(value.status){
+                location.reload()
+              }else{
+                alert(value.message)
+              }
+            }
+          )
+        }else{
+
+        }
+        
+      })
+    }
+  })
+</script>
+{% end %}

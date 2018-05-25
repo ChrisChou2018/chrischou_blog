@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block css %}
+
+{% end %}
+
+{% block content %}
+<div class="col-md-8 blog-main" style="word-break:break-all;">
+    <h1>{{article_obj.article_title}}</h1>
+    <br>
+    <br>
+    {% module GetHtmlByArticleId(article_obj.article_id) %}
+
+</div>
+
+{% end %}
