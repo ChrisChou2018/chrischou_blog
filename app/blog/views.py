@@ -62,7 +62,7 @@ class AddArticleHandlers(handlers.BaseHandler):
         self.render(
             'editor.html',
             ariticle_type = ariticle_type,
-            article_title = None,
+            article_obj = None,
             article_content_obj = None
         )
 
@@ -107,14 +107,14 @@ class EditorArticleHandlers(handlers.BaseHandler):
         article_id = self.get_argument('article_id')
         article_content_obj = models.ArticleContent. \
             get_content_by_article_id(article_id)
-        article_title = models.Ariticle. \
-            get_article_by_article_id(article_id).article_title
+        article_obj = models.Ariticle. \
+            get_article_by_article_id(article_id)
         article_content_obj = article_content_obj
         ariticle_type = models.Ariticle.type_choices
         self.render(
             'editor.html',
             ariticle_type = ariticle_type,
-            article_title = article_title,
+            article_obj = article_obj,
             article_content_obj = article_content_obj
         )
     

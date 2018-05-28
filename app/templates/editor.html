@@ -22,8 +22,8 @@
 <div class="row" style="padding-top: 0px;">
         <div class="col-md-6">
                 <div class="input-group">
-                <input type="text" class="form-control article_title" placeholder="输入文章标题" aria-describedby="basic-addon2" value="{{ article_title if article_title else '' }}">
-                <span class="input-group-addon" id="basic-addon2">标题  </span>
+                    <input type="text" class="form-control article_title" placeholder="输入文章标题" aria-describedby="basic-addon2" value="{{ article_obj.article_title if article_obj else '' }}">
+                    <span class="input-group-addon" id="basic-addon2">标题  </span>
                 </div>
         </div>
         <div class="col-md-6">
@@ -44,7 +44,9 @@
             <div class="col-md-9">
                 <select class="form-control article_type">
                     {% for i in ariticle_type %}
-                        {% if i[1] == '个人随笔' %}
+                        {% if not article_obj and i[1] == '个人随笔' %}
+                            <option value="{{i[0]}}" selected>{{i[1]}}</option>
+                        {% elif i[0] == article_obj.article_type %}
                             <option value="{{i[0]}}" selected>{{i[1]}}</option>
                         {% else %}
                             <option value="{{i[0]}}">{{i[1]}}</option>
