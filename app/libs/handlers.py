@@ -1,8 +1,24 @@
 import json
-import tornado.web
-from app.models import models
 
-class BaseHandler(tornado.web.RequestHandler):
+import tornado.web
+
+from app.models import models
+from app.models import base_model
+
+
+class DbBaseHandler(tornado.web.RequestHandler):
+    def prepare(self):
+        base_model.db_obj.connect()
+        return super(DbBaseHandler, self).prepare()
+
+    def on_finish(self):
+        if not base_model.db_obj.is_closed():
+            base_model.db_obj.close()
+        return super(DbBaseHandler, self).on_finish()
+
+
+
+class BaseHandler(DbBaseHandler):
     def _list_form_keys(self):
         return list()
     

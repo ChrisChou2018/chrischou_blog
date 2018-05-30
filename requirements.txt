@@ -1,0 +1,5 @@
+# suds
+tornado==5.0
+peewee==3.2
+PyMySQL==0.8
+bcrypt==3.1
