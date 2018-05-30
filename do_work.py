@@ -10,7 +10,7 @@ def main():
     logging.getLogger().setLevel("INFO".upper())
 
     command_fuc = {
-        'init_table':models.main,
+        'init_table':models.init_table,
     }
 
     if len(sys.argv) > 1:
