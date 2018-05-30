@@ -118,10 +118,6 @@ class Ariticle(base_model.BaseModel):
     
     @classmethod
     def get_article_type_count(cls):
-        # type_count_dict = dict()
-        # for i in cls.type_choices:
-        #     type_count_dict[i[1]] = cls.select().where(cls.article_type == i[0]).count()
-        # return type_count_dict
         return cls.select(cls.article_type, fn.COUNT(cls.article_type). \
             alias('ct')).group_by(cls.article_type).dicts()
     
