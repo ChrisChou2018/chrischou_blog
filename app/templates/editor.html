@@ -43,13 +43,13 @@
             </div>
             <div class="col-md-9">
                 <select class="form-control article_type">
-                    {% for i in ariticle_type %}
-                        {% if not article_obj and i[1] == '个人随笔' %}
-                            <option value="{{i[0]}}" selected>{{i[1]}}</option>
-                        {% elif i[0] == article_obj.article_type %}
-                            <option value="{{i[0]}}" selected>{{i[1]}}</option>
+                    {% for i in type_dict %}
+                        {% if not article_obj and type_dict[i] == '个人随笔' %}
+                            <option value="{{ i }}" selected>{{ type_dict[i] }}</option>
+                        {% elif  article_obj and i == article_obj.article_type %}
+                            <option value="{{ i }}" selected>{{ type_dict[i] }}</option>
                         {% else %}
-                            <option value="{{i[0]}}">{{i[1]}}</option>
+                            <option value="{{ i }}">{{ type_dict[i] }}</option>
                         {% end %}
                     {% end %}
                 </select>

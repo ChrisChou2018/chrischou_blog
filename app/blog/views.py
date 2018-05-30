@@ -58,10 +58,10 @@ def remove_xss(text):
 class AddArticleHandlers(handlers.BaseHandler):
     @decorators.login_verification
     def get(self):
-        ariticle_type = models.Ariticle.type_choices
+        type_dict = dict(models.Ariticle.type_choices)
         self.render(
             'editor.html',
-            ariticle_type = ariticle_type,
+            type_dict = type_dict,
             article_obj = None,
             article_content_obj = None
         )
@@ -88,14 +88,14 @@ class AddArticleHandlers(handlers.BaseHandler):
 
 class ArticleContentHandlers(handlers.BaseHandler):
     def get(self):
-        article_type = models.Ariticle.type_choices
+        type_dict = dict(models.Ariticle.type_choices)
         article_id = self.get_argument('article_id')
         article_obj = models.Ariticle.get_by_id(article_id)
         type_count_dict = models.Ariticle.get_article_type_count()
         about_text = models.User.get_about_text_by_user_name('chris')
         self.render(
             'article_content.html',
-            article_type = article_type,
+            type_dict = type_dict,
             article_obj = article_obj,
             type_count_dict = type_count_dict,
             about_text = about_text
@@ -110,10 +110,10 @@ class EditorArticleHandlers(handlers.BaseHandler):
         article_obj = models.Ariticle. \
             get_article_by_article_id(article_id)
         article_content_obj = article_content_obj
-        ariticle_type = models.Ariticle.type_choices
+        type_dict = dict(models.Ariticle.type_choices)
         self.render(
             'editor.html',
-            ariticle_type = ariticle_type,
+            type_dict = type_dict,
             article_obj = article_obj,
             article_content_obj = article_content_obj
         )
