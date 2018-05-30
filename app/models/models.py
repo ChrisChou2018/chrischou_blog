@@ -1,6 +1,7 @@
 import peewee
 from app.models import base_model
 import json
+from peewee import fn
 
 class User(base_model.BaseModel):
     user_id = peewee.AutoField(primary_key=True)
@@ -112,15 +113,17 @@ class Ariticle(base_model.BaseModel):
         if search_value:
             article_count = cls.select().where(search_value).count()
         else:
-            article_count = cls.select().count()
+            article_count = cls.select().count(cls._meta.database)
         return article_count
     
     @classmethod
     def get_article_type_count(cls):
-        type_count_dict = dict()
-        for i in cls.type_choices:
-            type_count_dict[i[1]] = cls.select().where(cls.article_type == i[0]).count()
-        return type_count_dict
+        # type_count_dict = dict()
+        # for i in cls.type_choices:
+        #     type_count_dict[i[1]] = cls.select().where(cls.article_type == i[0]).count()
+        # return type_count_dict
+        return cls.select(cls.article_type, fn.COUNT(cls.article_type). \
+            alias('ct')).group_by(cls.article_type).dicts()
     
     @classmethod
     def get_article_by_article_id(cls, article_id):

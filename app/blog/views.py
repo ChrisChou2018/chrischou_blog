@@ -19,9 +19,9 @@ class IndexHandlers(handlers.BaseHandler):
         current_page =  self.get_argument('page', 1)
         article_type_id = self.get_argument('article_type', None)
         filter_args = None
-        article_type = models.Ariticle.type_choices
         article_list = models.Ariticle.select()
         type_count_dict = models.Ariticle.get_article_type_count()
+        type_dict = dict(models.Ariticle.type_choices)
         if article_type_id:
             filter_args = '&article_type={0}'.format(article_type_id)
             search_value = (models.Ariticle.article_type == article_type_id)
@@ -38,7 +38,7 @@ class IndexHandlers(handlers.BaseHandler):
         about_text = models.User.get_about_text_by_user_name('chris')
         self.render(
             'index.html', 
-            article_type = article_type,
+            type_dict = type_dict,
             type_count_dict = type_count_dict,
             article_list = article_list,
             article_count = article_count,

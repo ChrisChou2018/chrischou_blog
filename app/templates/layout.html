@@ -162,10 +162,8 @@
               <div class="panel-heading">ArticleType</div>
               <div class="panel-body">
                   <ol class="list-unstyled article_type">
-                  {% for i in article_type %}
-                  {% if type_count_dict[i[1]]%}
-                    <li><a href="/?article_type={{i[0]}}">{{i[1]}}({{type_count_dict[i[1]]}})</a></li>
-                  {% end %}
+                  {% for i in type_count_dict %}
+                    <li><a href="/?article_type={{i}}">{{type_dict[i['article_type']]}}({{i['ct']}})</a></li>
                   {% end %}
                   <li><a href="/">all</a></li>
                   </ol>
