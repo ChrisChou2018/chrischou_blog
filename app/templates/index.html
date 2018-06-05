@@ -7,7 +7,7 @@
 <div class="col-md-8 blog-main">
   {% for i in article_list %}
   <div class="blog-post">
-    <h3>{{ i.article_title }}</h3>
+    <h3><a href="/article_content/?article_id={{ i.article_id }}" style='cursor:pointer;text-decoration:none;'>{{ i.article_title }}</a></h3>
     <p class="blog-post-meta">{{i.create_time}} 
       {% if current_user %}
         <a href="/editor_article/?article_id={{i.article_id}}" style='cursor:pointer;text-decoration:none;font-size: 15px;'>编辑</a>
@@ -16,8 +16,7 @@
         <a href="#"></a>
       {% end %}
     </p>
-    <a href="/article_content/?article_id={{ i.article_id }}" style='cursor:pointer;text-decoration:none;font-size: 15px;'> {% module GetContentByArticleId(i.article_id) %} </a>
-    <hr>
+    <span style="font-size: 15px;"> {% module GetContentByArticleId(i.article_id) %} </span>
   </div><!-- /.blog-post -->
   {% end %}
   
