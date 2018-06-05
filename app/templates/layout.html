@@ -62,6 +62,7 @@
       margin: 10px 0 10px 20px;
     }
     .blog-header{
+      overflow: auto;
       background-image: url('/static/image/2.png');
       background-size:cover;
     }
@@ -105,7 +106,7 @@
     <div class="blog-masthead" style="background-color:black">
       <div class="container" style="width: 80%">
         <nav class="blog-nav">
-          <a class="blog-nav-item active" href="/">Home</a>
+          <a class="blog-nav-item active home_btn" href="/">Home</a>
           <ul class="nav navbar-nav navbar-right">
             {% if current_user %}
               <li role="presentation" class="dropdown">
@@ -125,7 +126,7 @@
         </nav>
       </div>
     </div>
-    <div class="blog-header" style="padding: 70px 40px; padding-left: 140px; width: 100%; height: 290px;">
+    <div class="blog-header" style="padding: 70px 40px; padding-left: 140px; width: 100%; height: 290px;overflow: auto;">
         
     </div>
     
@@ -234,6 +235,22 @@
         var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
         return r ? r[1] : undefined;
     }
+    if(document.body.scrollWidth <700){
+      $('.blog-header').hide()
+      $('.home_btn').hide()
+    }else{
+      $('.blog-header').show()
+      $('.home_btn').show()
+    }
+    $(window).resize(function(){
+      if(document.body.scrollWidth <700){
+        $('.blog-header').hide()
+        $('.home_btn').hide()
+      }else{
+        $('.blog-header').show()
+        $('.home_btn').show()
+      }
+      })
     </script>
     {% block js %}
     

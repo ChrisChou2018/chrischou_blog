@@ -18,8 +18,8 @@
     <link href="/static/css/signin.css" rel="stylesheet">
     <style>
       body{
-        background-color:gray;
-        background-image: url('/static/image/image1.jpg');
+        background-color:black;
+        /* background-image: url('/static/image/image1.jpg'); */
         background-size:cover;
       }
     </style>
@@ -28,19 +28,26 @@
   <body>
 
     <div class="container">
-
+      <a onclick="history.back()">🔙back</a>
       <form class="form-signin" action="/login/" method="POST">
         {% module xsrf_form_html() %}
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">输入超级站户</h2>
         <label for="inputUserName" class="sr-only">UserName</label>
-        <input type="text" id="inputText" class="form-control" placeholder="input UserName" required="" autofocus="" name="username" value="{{ form_data['username'] if form_data and form_data.get('username') else '' }}">
+        <input type="text" id="inputText" class="form-control" placeholder="UserName" required="" autofocus="" name="username" value="{{ form_data['username'] if form_data and form_data.get('username') else '' }}">
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" name="password" value="{{ form_data['password'] if form_data and form_data.get('password') else '' }}">
         <span style="color:red">{{msg}}</span>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
       </form>
 
     </div> <!-- /container -->
+    <script>
+    if(document.body.scrollWidth <500){
+      $('body')[0].style.backgroundImage = ''
+    }else{
+      
+    }
+    </script>
 
 
 
