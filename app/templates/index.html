@@ -6,9 +6,9 @@
 {% block content %}
 <div class="col-md-8 blog-main">
   {% for i in article_list %}
-  <div class="blog-post">
-    <h3><a href="/article_content/?article_id={{ i.article_id }}" style='cursor:pointer;text-decoration:none;'>{{ i.article_title }}</a></h3>
-    <p class="blog-post-meta">{{i.create_time}} 
+  <div class="blog-post" style="margin-bottom: 30px;">
+    <h4><a href="/article_content/?article_id={{ i.article_id }}" style='cursor:pointer;text-decoration:none;'>{{ i.article_title }}</a></h4>
+    <p class="blog-post-meta" style="margin-bottom: 10px;">{{i.create_time}} 
       {% if current_user %}
         <a href="/editor_article/?article_id={{i.article_id}}" style='cursor:pointer;text-decoration:none;font-size: 15px;'>编辑</a>
         <a style='cursor:pointer;text-decoration:none;font-size: 15px;' class="delete_article" article-id="{{i.article_id}}">删除</a>
@@ -16,7 +16,7 @@
         <a href="#"></a>
       {% end %}
     </p>
-    <span style="font-size: 15px;"> {% module GetContentByArticleId(i.article_id) %} </span>
+    <span style="font-size: 14px;"> {% module GetContentByArticleId(i.article_id) %} </span>
   </div><!-- /.blog-post -->
   {% end %}
   
