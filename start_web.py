@@ -32,7 +32,7 @@ app = BaseApplication(
 )
 
 
-def main():
+def main(): 
     """
     如果xheaders为True，将支持把所有请求的HTTP头解析成X-Real-Ip和X-Scheme格式，
     而tornado原先将HTTP头解析成remote IP和HTTP scheme格式。
